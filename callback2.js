@@ -9,7 +9,7 @@ let empleados = [{
     nombre: 'victoria'
 }];
 
-let salario = [{
+let salarios = [{
     id: 1,
     salario: 1000
 }, {
@@ -22,37 +22,33 @@ let getEmpleado = (id, callback) => {
     if (!empleadoDB) {
         callback(`no existe un empleado con el id ${id}`);
     } else {
-        console.log(empleadoDB);
+        callback(null, empleadoDB);
     }
 }
-
 
 let getSalario = (empleado, callback) => {
     let salarioDB = salarios.find(salario => salario.id === empleado.id);
     if (!salarioDB) {
-        console.lo(`No se encontró saliar para el usuario ${empleado.nombre}`);
+       callback(`No se encontró salario para el usuario ${empleado.nombre}`);
     } else {
-        callback({
+        callback(null, {
             nombre: empleado.nombre,
             salario: salarioDB.salario,
             id: empleado.id
         });
-    }
+    }  
 }
 
-getEmpleado(1, (err, empleado) => {
-    if (err) {
-        return console.log(err);
+getEmpleado(4, (err, empleado) => {
+    if (err) { 
+        return console.log(err); 
     }
-    console.log(empleado);
-});
-
-
-getSalario(empleado, (err, resp) => {
-    if(err) {
-        return console.log(err);
-    } else{
-        console.log("el salario es de +");
-        
-    }
+    getSalario(empleado, (err,resp) => {
+        if (err) { 
+            return console.log(err); 
+        } else {
+            console.log(`el sueldo del empleado ${resp.nombre} es de: ${resp.salario}`)
+        }
+    })
+    
 });
