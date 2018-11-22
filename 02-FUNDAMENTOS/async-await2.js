@@ -31,7 +31,7 @@ let getSalario = async (empleado) => {
     if (!listaSalario) {
         throw new Error("No existe salario para el usuario " + empleado.nombre);
     } else {
-        return{
+        return {
             nombre: empleado.nombre,
             salario: listaSalario.salario,
             id: empleado.id
