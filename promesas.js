@@ -33,7 +33,7 @@ let getEmpleado = (id) => {
 let getSalario = (empleado) => {
     return new Promise((resolve, reject) => {
         let listaSalario = salarios.find(requestSalario => requestSalario.id === empleado.id);
-        if(!listaSalario) {
+        if (!listaSalario) {
             reject("No existe salario para el usuario " + empleado.nombre);
         } else {
             resolve({
@@ -45,13 +45,22 @@ let getSalario = (empleado) => {
     });
 }
 
-getEmpleado(1).then(empleado => {
-    getSalario(empleado).then(listaSalario => {
-        console.log("El salario del empleado " + empleado.nombre + " es de: $" + listaSalario.salario);
+/* getEmpleado(2).then(empleado => {
+    getSalario(empleado).then(resp => {
+        console.log("El salario del empleado " + empleado.nombre + " es de: $" + resp.salario);
     }, (err) => {
         console.log(err);
     }); 
     
 }, (err) => {
     console.log(err);
-});
+}); */
+
+
+getEmpleado(1).then(empleado => {
+    return getSalario(empleado);
+}) .then(resp => {
+    console.log("El salario de: " + resp.nombre + " es de: " + resp.salario);
+}) .catch(err => {
+    console.log(err)
+})
